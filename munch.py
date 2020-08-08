@@ -3,12 +3,12 @@ import random
 debug = int(input("0 - debug; 1 - basic: "))
 if debug == 0:
 	users = ["Алишер", "Тима"]
-	co = 6
+	count = 6
 else:
 	users = []
 	for i in range(2):
 		users.append(input("Имя?:"))
-	co = int(input("Кол-во карт: "))
+	count = int(input("Кол-во карт: "))
 
 bool = True
 mu1 = []
@@ -16,7 +16,7 @@ mu2 = []
 a = ["thief", "wizard", "warrior", "elf", "ogr"]
 b = ["dragons", "evil org", "witch", "witcher", "tank"]
 
-def cardsbegina(x):
+def cardsbegin1(x):
 	for i in range(x):
 		c = random.randint(0, 1)
 		n = random.randint(0, 4)
@@ -35,8 +35,8 @@ def cardsbegin2(x):
 			mu2.append(b[n])
 
 def begin():
-	cardsbegin1(co)
-	cardsbegin2(co)
+	cardsbegin1(count)
+	cardsbegin2(count)
 	print("Карты " + users[0] + " : " + str(mu1))
 	print("Карты " + users[1] + " : " + str(mu2))
 
