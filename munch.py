@@ -2,63 +2,47 @@ import random
 
 debug = int(input("0 - debug; 1 - basic: "))
 if debug == 0:
-	users = ["Алишер", "Тима"]
-	count = 6
+	user = ["Алишер", "Тима"]
+	count_card = 10
 else:
-	users = []
-	for i in range(2):
-		users.append(input("Имя?:"))
-	count = int(input("Кол-во карт: "))
+	count_user = int(input("Скока игроков?: "))
+	user = []
+	for i in range(count_user):
+		user.append(input("Имя?:"))
+	count_card = int(input("Кол-во карт: "))
+
+count_user = len(user)
 
 bool = True
-mu1 = []
-mu2 = []
+card_user = [[], [], [], []]
 a = ["thief", "wizard", "warrior", "elf", "ogr"]
 b = ["dragons", "evil org", "witch", "witcher", "tank"]
 
-def cardsbegin1(x):
+def cardsbegin(x):
 	for i in range(x):
 		c = random.randint(0, 1)
-		n = random.randint(0, 4)
-		if c == 0:
-			mu1.append(a[n])
-		else:
-			mu1.append(b[n])
-
-def cardsbegin2(x):
-	for i in range(x):
-		c = random.randint(0, 1)
-		n = random.randint(0, 4)
-		if c == 0:
-			mu2.append(a[n])
-		else:
-			mu2.append(b[n])
+		for it in range(0, count_user):
+			n = random.randint(0, 4)
+			if c == 0:
+				card_user[it].append(a[n])
+			else:
+				card_user[it].append(b[n])
 
 def begin():
-	cardsbegin1(count)
-	cardsbegin2(count)
-	print("Карты " + users[0] + " : " + str(mu1))
-	print("Карты " + users[1] + " : " + str(mu2))
+	cardsbegin(count_card)
+	for i in range(0, count_user):
+		print("Карты " + user[i] + " : " + str(card_user[i]))
 
 def chkcnt():
-	while len(mu1) > 5:
-		d = int(input(users[0] + ", введи номер карты, которую не жалко: ")) - 2
-		del mu1[d]
-		print("Ты теряешь: " + mu1[d])
-	while len(mu2) > 5:
-		d = int(input(users[1] + ", введи номер карты, которую не жалко: ")) - 2
-		del mu2[d]
-		print("Ты теряешь: " + mu2[d])
+	for i in range(0, count_user):
+		while len(card_user[i]) > 5:
+			d = int(input(user[i] + ", введи номер карты, которую не жалко: ")) - 1
+			del card_user[i][d]
+			print("Теперь у тебя: " + str(card_user[i]))
 
 def game():
 	while bool == True:
 		chkcnt()
-
-def getcard():
-		n = random.randint(0, 4)
-		mu1.append(a[n])
-		n = random.randint(0, 4)
-		mu2.append(a[n])
 
 begin()
 game()
