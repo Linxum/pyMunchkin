@@ -3,7 +3,7 @@ import random
 debug = int(input("0 - debug; 1 - basic: "))
 if debug == 0:
 	user = ["Алишер", "Тима"]
-	count_card = 10
+	count_card = 6
 else:
 	count_user = int(input("Скока игроков?: "))
 	user = []
@@ -40,9 +40,11 @@ def chkcnt():
 			del card_user[i][d]
 			print("Теперь у тебя: " + str(card_user[i]))
 
-def game():
-	while bool == True:
-		chkcnt()
+def door():
+	print("Check")
+	open_door = a[random.randint(0, 4)]
+	print("Ты открыл дверь. Тебе выпало: " + open_door)
 
 begin()
-game()
+chkcnt()
+door()
