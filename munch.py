@@ -1,16 +1,20 @@
 import random
 
+names =['Алишер', 'Тима', 'Акакий', 'Тофик', 'Никита']
+
 debug = int(input("0 - debug; 1 - basic: "))
+mode = int(input("0 - игра с ботом; 1 - игра вдвоем: "))
 if debug == 0:
 	user = ["Алишер", "Тима"]
 	count_card = 6
 else:
-	count_user = int(input("Скока игроков?: "))
+	count_user = int(input("Скока игроков (до 4-х)?: "))
 	user = []
-	for i in range(count_user):
-		user.append(input("Имя?:"))
+	user.append(input("Имя?: "))
+	for i in range(0, count_user - 1):
+		user.append(names[random.randint(0,4)])
 	count_card = int(input("Кол-во карт: "))
-
+	print("Ваши соперники: " + str(', '.join(user[1:])))
 count_user = len(user)
 
 bool = True
@@ -35,18 +39,29 @@ def cardsbegin(x):
 			
 def begin():
 	cardsbegin(count_card)
-	for i in range(0, count_user):
-		print("Карты " + user[i] + " : " + str(', '.join(card_user[i])))
+	if mode == 1:
+		for i in range(0, count_user):
+			print("Карты " + user[i] + " : " + str(', '.join(card_user[i])))
+	else :
+		print("Твои карты: " + str(', '.join(card_user[0])))
 
 def chkcnt():
-	for i in range(0, count_user):
-		while len(card_user[i]) > 5:
-			d = int(input(user[i] + ", введи номер карты, которую не жалко: ")) - 1
-			del card_user[i][d]
-			print("Теперь у тебя: " + str(', '.join(card_user[i])))
+	if mode == 1:
+		for i in range(0, count_user):
+			while len(card_user[i]) > 5:
+				d = int(input(user[i] + ", введи номер карты, которую не жалко: ")) - 1
+				del card_user[i][d]
+				print("Теперь у тебя: " + str(', '.join(card_user[i])))
+	else:
+		while len(card_user[0]) > 5:
+				d = int(input(user[0] + ", введи номер карты, которую не жалко: ")) - 1
+				del card_user[0][d]
+				print("Теперь у тебя: " + str(', '.join(card_user[0])))
+				for it in range(count_user - 1):
+					del card_user[it][d]
 
 def door():
-	print("Check")
+	print("Check-check")
 	open_door = doors[random.randint(0, 3)][random.randint(0, 4)]
 	print("Ты открыл дверь. Тебе выпало: " + str(open_door))
 	actions()
