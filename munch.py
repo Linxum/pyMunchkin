@@ -1,4 +1,4 @@
-import random
+import random, time
 
 names =['Алишер', 'Тима', 'Акакий', 'Тофик', 'Никита']
 
@@ -6,6 +6,7 @@ debug = int(input("0 - debug; 1 - basic: "))
 mode = int(input("0 - игра с ботом; 1 - игра вдвоем: "))
 if debug == 0:
 	user = ["Алишер", "Тима"]
+	user_items = [[[], [], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]]
 	count_card = 6
 else:
 	count_user = int(input("Скока игроков (до 4-х)?: "))
@@ -44,6 +45,7 @@ def begin():
 			print("Карты " + user[i] + " : " + str(', '.join(card_user[i])))
 	else :
 		print("Твои карты: " + str(', '.join(card_user[0])))
+	time.sleep(2)
 
 def chkcnt():
 	if mode == 1:
@@ -57,11 +59,11 @@ def chkcnt():
 				d = int(input(user[0] + ", введи номер карты, которую не жалко: ")) - 1
 				del card_user[0][d]
 				print("Теперь у тебя: " + str(', '.join(card_user[0])))
-				for it in range(count_user - 1):
-					del card_user[it][d]
+	time.sleep(3)
 
 def door():
 	print("Check-check")
+	time.sleep(1)
 	open_door = doors[random.randint(0, 3)][random.randint(0, 4)]
 	print("Ты открыл дверь. Тебе выпало: " + str(open_door))
 	actions()
@@ -72,13 +74,16 @@ def actions():
 		square = random.randint(1, 6)
 		print("Тебе выпало: " + str(square))
 		if square > 4 :
-			print("Тебе везет сегодня!")
+			print("А тебе везет!")
 		else:
 			print("Не повезло")
 	elif action == "К" or action == "к" or action == "K" or action == "k":
 		print("Твои карты: " + str(', '.join(card_user[0])))
 		chosen_card = input("Выбери карту действия: ")
-
+	elif action == "П" or action == "п" or action == "h" or action == "H" or action == "p"  or action == "P" or action == "g" or action == "G":
+		print("Список твоих немногочисленных друзей: " + str(', '.join(user)))
+		time.sleep(1)
+		fri = input("А теперь выбери одного из них: ")
 begin()
 chkcnt()
 door()
