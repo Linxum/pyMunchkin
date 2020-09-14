@@ -1,4 +1,5 @@
 import random, time
+import sqlite3 as sql
 
 names =['Алишер', 'Тима', 'Акакий', 'Тофик', 'Никита']
 
@@ -11,6 +12,7 @@ if debug == 0:
 else:
 	count_user = int(input("Скока игроков (до 4-х)?: "))
 	user = []
+
 	user.append(input("Имя?: "))
 	for i in range(0, count_user - 1):
 		user.append(names[random.randint(0,4)])
@@ -20,6 +22,9 @@ count_user = len(user)
 
 bool = True
 card_user = [[], [], [], []]
+
+libcards = sql.connect('cards.sqlite')
+cursor = libcards.cursor()
 
 doors = [["навальный", "лукашенко", "медведев", "путин", "бэтмен"], ["пожилая чокопайка", "каво-2", "олежа навальный", "карнавальный", "q"], ["поцелуй Брежнева", "q", "q", "q", "q"], ["плоти нологи", "денег нет, но вы держитесь", "q", "q", "q"]]
 riches = [["бротофан", "wargaming", "любэ", "q", "q"], ["коммандирово4ка Ельцина", "q", "q", "q", "q"], ["маска для сна", "брови Брежнева", "q", "q", "q"], ["зубр", "мишка", "q", "q", "q"], ["палёная б/ушная колонка JBL", "бэтаранг", "q", "q", "q"]] 
